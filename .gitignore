@@ -8,9 +8,8 @@ config.local.json
 *.log
 .DS_Store
 coverage/
-apps/web/dist/
-apps/server/dist/
 packages/*/dist/
+tools/*/dist/
 *.tsbuildinfo
 uploads/
 temp/
