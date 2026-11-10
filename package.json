@@ -9,8 +9,9 @@
     "packages/*"
   ],
   "scripts": {
+    "postinstall": "npm run build -w @wob/pathway-core",
     "dev": "npm run dev:pathway",
-    "dev:pathway": "concurrently -n pathway-server,pathway-web -c blue,green \"npm run dev -w @wob/pathway-server\" \"npm run dev -w @wob/pathway-web\"",
+    "dev:pathway": "npm run build -w @wob/pathway-core && concurrently -n pathway-core,pathway-server,pathway-web -c magenta,blue,green \"npm run dev -w @wob/pathway-core\" \"npm run dev -w @wob/pathway-server\" \"npm run dev -w @wob/pathway-web\"",
     "build": "npm run build:pathway",
     "build:pathway": "npm run build -w @wob/pathway-core && npm run build -w @wob/pathway-server && npm run build -w @wob/pathway-web",
     "start": "npm run start:pathway",

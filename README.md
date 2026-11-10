@@ -27,8 +27,8 @@ docs/
 
 ```bash
 cp tools/pathway-server/.env.example tools/pathway-server/.env
-npm install
-npm run dev:pathway
+npm install          # postinstall 会构建 @wob/pathway-core
+npm run dev:pathway  # 启动前也会先确保 core 已构建
 ```
 
 - UI: http://127.0.0.1:5173

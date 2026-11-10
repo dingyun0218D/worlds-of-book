@@ -17,8 +17,8 @@
 ```bash
 # 在仓根执行
 cp tools/pathway-server/.env.example tools/pathway-server/.env
-npm install
-npm run dev:pathway
+npm install          # postinstall 会构建 @wob/pathway-core（dist/）
+npm run dev:pathway  # 若 dist 缺失会先 build core，再并行 watch core/server/web
 ```
 
 - 前端：http://127.0.0.1:5173
