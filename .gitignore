@@ -11,5 +11,6 @@ coverage/
 apps/web/dist/
 apps/server/dist/
 packages/*/dist/
+*.tsbuildinfo
 uploads/
 temp/
