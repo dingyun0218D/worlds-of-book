@@ -1,12 +1,10 @@
 import type {
   AdapterContext,
-  PathwayMode,
   PathwayStatus,
   PlatformMeta,
   PlatformState,
   PublishPayload,
 } from "@wob/pathway-core";
-import { createStep, finishResult, markStep, nowIso } from "@wob/pathway-core";
 
 export function missingFrom(
   ctx: AdapterContext,
@@ -53,30 +51,6 @@ export function withPrefix(ctx: AdapterContext, text: string): string {
   if (!prefix) return text;
   if (text.startsWith(prefix)) return text;
   return `${prefix} ${text}`.trim();
-}
-
-export async function runUnavailableVerify(
-  meta: PlatformMeta,
-  message: string,
-  checklist: string[],
-) {
-  const startedAt = nowIso();
-  let steps = [
-    createStep("check_api", "检查官方发帖 API", "running"),
-    createStep("checklist", "生成人工检查清单", "pending"),
-  ];
-  steps = markStep(steps, "check_api", "failed", message);
-  steps = markStep(steps, "checklist", "ok", checklist.join(" | "));
-  return finishResult({
-    platformId: meta.id,
-    ok: false,
-    status: "unavailable",
-    mode: "unavailable" satisfies PathwayMode,
-    message,
-    steps,
-    startedAt,
-    errorCode: "NO_OFFICIAL_PUBLISH_API",
-  });
 }
 
 export function assertImages(payload: PublishPayload, min = 0): string | null {

@@ -3,9 +3,7 @@ export type PlatformId =
   | "x"
   | "facebook"
   | "instagram"
-  | "xiaohongshu"
-  | "zhihu"
-  | "tieba";
+  | "tiktok";
 
 export type PathwayMode = "official_api" | "semi_auto" | "unavailable";
 
