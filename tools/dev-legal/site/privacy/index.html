@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privacy Policy · Worlds of Book</title>
+    <meta
+      name="description"
+      content="Privacy Policy for Worlds of Book internal developer tooling used to verify official posting APIs."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Source+Sans+3:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <a class="brand" href="../">Worlds of Book <span>Legal</span></a>
+      <section class="panel">
+        <a class="nav-back" href="../">← 返回首页</a>
+        <p class="kicker">Privacy Policy</p>
+        <h1>隐私政策</h1>
+        <div class="meta">
+          <span>生效日期：2026-11-15</span>
+          <span>适用：Worlds of Book 开发测试工具</span>
+        </div>
+
+        <article>
+          <h2>1. 我们是谁</h2>
+          <p>
+            本政策适用于 Worlds of Book 的内部开发 / 测试工具（例如发帖通路验证）。
+            这些工具帮助项目成员确认官方发帖 API 是否配置正确。
+          </p>
+
+          <h2>2. 我们处理哪些数据</h2>
+          <p>为实现授权发帖验证，工具可能处理：</p>
+          <ul>
+            <li>你在 OAuth 流程中授权后提供的 access token / refresh token / open id；</li>
+            <li>与发帖相关的基础创作者信息（如平台返回的用户标识、公开资料字段）；</li>
+            <li>你主动提供的测试文案、测试图片或其公网 URL；</li>
+            <li>验证结果日志（成功 / 失败步骤、错误码），用于排障。</li>
+          </ul>
+          <p>我们<strong>只请求发帖相关权限</strong>，不会为通路验证索取与发布无关的敏感权限。</p>
+
+          <h2>3. 数据用于什么</h2>
+          <ul>
+            <li>代表你已授权的账号调用官方 API，完成通路验证；</li>
+            <li>在本机或项目约定环境中保存凭证，避免重复授权；</li>
+            <li>排查集成问题（例如缺 scope、域名未验证、token 过期）。</li>
+          </ul>
+
+          <h2>4. 我们不出售数据</h2>
+          <p>
+            我们<strong>不出售</strong>、不出租、不向广告商提供你的平台令牌或账号数据。
+            除完成 API 调用所必需的第三方平台（TikTok、Meta、X 等）外，不会把令牌提供给无关第三方。
+          </p>
+
+          <h2>5. 存储位置与期限</h2>
+          <p>
+            通路验证工具默认把凭证保存在开发者本机（例如本地
+            <code>.env</code> / <code>.data/credentials.json</code>），不会提交到 Git。
+            Token 的有效期遵循各平台规则；过期后需刷新或重新授权。
+            当你撤销授权或提出删除请求时，维护者应删除本地保存的相关令牌。
+          </p>
+
+          <h2>6. 可撤销授权与你的选择</h2>
+          <ul>
+            <li>在对应平台的应用授权设置中撤销访问；</li>
+            <li>删除本机凭证文件或在工具中覆盖清空；</li>
+            <li>联系维护者协助删除仍保存在约定环境中的令牌。</li>
+          </ul>
+
+          <h2>7. 第三方平台</h2>
+          <p>
+            当你授权 TikTok、Meta、X 等平台时，其数据处理还受各平台自身隐私政策约束。
+            请同时阅读这些平台的开发者与用户隐私条款。
+          </p>
+
+          <h2>8. 变更</h2>
+          <p>若工具收集范围或存储方式发生变化，我们将更新本页面并修订生效日期。</p>
+
+          <div class="lang">
+            <h2>English summary</h2>
+            <p>
+              This policy covers Worlds of Book <strong>internal development / testing tools</strong>.
+              We process OAuth tokens, basic creator identifiers, and test media you provide,
+              solely to verify official posting APIs. We request
+              <strong>posting-related permissions only</strong>,
+              <strong>do not sell user data</strong>, store credentials locally for development,
+              and you may <strong>revoke authorization</strong> at any time via the platform or by
+              asking us to delete stored tokens.
+            </p>
+          </div>
+        </article>
+
+        <p class="footer-note">
+          隐私相关请求：通过本 GitHub 仓库 Issues 或项目内部约定渠道联系维护者。
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
