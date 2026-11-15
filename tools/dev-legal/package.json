@@ -2,7 +2,7 @@
   "name": "@wob/dev-legal",
   "private": true,
   "version": "0.1.0",
-  "description": "Static Terms of Service and Privacy Policy pages for developer-platform registration",
+  "description": "Official website plus Terms of Service and Privacy Policy pages for developer-platform registration",
   "scripts": {
     "dev": "npx --yes serve site -l 4173",
     "start": "npx --yes serve site -l 4173"
