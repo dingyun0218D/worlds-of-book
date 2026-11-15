@@ -21,18 +21,8 @@ npm install          # postinstall 会构建 @wob/pathway-core（dist/）
 npm run dev:pathway  # 若 dist 缺失会先 build core，再并行 watch core/server/web
 ```
 
-- 前端：http://127.0.0.1:5173（固定端口；若占用会直接失败，避免开到 5174 却仍看旧页）
+- 前端：http://127.0.0.1:5173（固定端口；`dev:pathway` 启动前会自动释放 5173/8787）
 - API：http://127.0.0.1:8787/api/health
-
-若提示端口占用，先结束旧进程再启动：
-
-```bash
-# macOS / Linux
-lsof -ti tcp:5173,tcp:8787 | xargs kill
-# 或一次性清掉本仓相关 node：
-pkill -f 'pathway-server|vite' || true
-npm run dev:pathway
-```
 
 凭证可写在：
 
