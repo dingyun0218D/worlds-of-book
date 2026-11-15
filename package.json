@@ -1,0 +1,31 @@
+{
+  "name": "worlds-of-book",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Worlds of Book monorepo",
+  "workspaces": [
+    "apps/*",
+    "tools/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "postinstall": "npm run build -w @wob/pathway-core",
+    "dev": "npm run dev:pathway",
+    "free:pathway-ports": "node scripts/free-pathway-ports.mjs",
+    "dev:pathway": "npm run free:pathway-ports && npm run build -w @wob/pathway-core && concurrently -n pathway-core,pathway-server,pathway-web -c magenta,blue,green \"npm run dev -w @wob/pathway-core\" \"npm run dev -w @wob/pathway-server\" \"npm run dev -w @wob/pathway-web\"",
+    "dev:legal": "npm run dev -w @wob/dev-legal",
+    "build": "npm run build:pathway",
+    "build:pathway": "npm run build -w @wob/pathway-core && npm run build -w @wob/pathway-server && npm run build -w @wob/pathway-web",
+    "start": "npm run start:pathway",
+    "start:pathway": "npm run start -w @wob/pathway-server",
+    "typecheck": "npm run typecheck:pathway",
+    "typecheck:pathway": "npm run typecheck -w @wob/pathway-core && npm run typecheck -w @wob/pathway-server && npm run typecheck -w @wob/pathway-web"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "typescript": "^5.9.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
