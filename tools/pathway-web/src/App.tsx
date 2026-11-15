@@ -61,8 +61,8 @@ export function App() {
           Worlds of Book <span>通路台</span>
         </div>
         <p className="lede">
-          本机发帖通路验证工具。你和同事各自启动、各自填自己的凭证，先确认抖音 / X /
-          Facebook / Instagram 等官方通路，以及小红书半自动与知乎、贴吧的结论。
+          本机发帖通路验证工具。你和同事各自启动、各自填自己的凭证，确认抖音 / TikTok / X /
+          Facebook / Instagram 等可官方自动化的发帖通路。
         </p>
       </header>
 
@@ -74,7 +74,7 @@ export function App() {
             <textarea value={text} onChange={(e) => setText(e.target.value)} />
           </label>
           <label className="field">
-            测试图片（可多选；小红书/抖音等需要）
+            测试图片（可多选；抖音等本地上传通路需要）
             <input
               type="file"
               accept="image/*"

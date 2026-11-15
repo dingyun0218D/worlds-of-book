@@ -105,41 +105,55 @@ export const PLATFORM_META: Record<string, PlatformMeta> = {
       },
     ],
   },
-  xiaohongshu: {
-    id: "xiaohongshu",
-    name: "小红书",
-    nameEn: "Xiaohongshu",
-    mode: "semi_auto",
+  tiktok: {
+    id: "tiktok",
+    name: "TikTok",
+    nameEn: "TikTok",
+    mode: "official_api",
     description:
-      "开放平台 write_notes 尚未普遍开放。一期验证「素材包导出 / 发布页预填清单」半自动通路。",
-    docsUrl: "https://miniapp.xiaohongshu.com/doc/DC604617",
-    credentialFields: [],
-  },
-  zhihu: {
-    id: "zhihu",
-    name: "知乎",
-    nameEn: "Zhihu",
-    mode: "unavailable",
-    description: "知乎开放平台当前以数据检索为主，无稳定的个人内容发布 API。",
-    docsUrl: "https://developer.zhihu.com/",
-    credentialFields: [],
-  },
-  tieba: {
-    id: "tieba",
-    name: "百度贴吧",
-    nameEn: "Baidu Tieba",
-    mode: "unavailable",
-    description: "无可用的通用个人发帖开放 API；一期仅给出通路结论与人工检查清单。",
-    credentialFields: [],
+      "TikTok Content Posting API（图文 Direct Post）。需 video.publish 授权；图片须来自已验证域名的公网 URL。未审核应用仅能发 SELF_ONLY。",
+    docsUrl: "https://developers.tiktok.com/doc/content-posting-api-get-started",
+    credentialFields: [
+      {
+        key: "TIKTOK_CLIENT_KEY",
+        label: "Client Key",
+        required: false,
+        help: "TikTok for Developers 应用 Client Key（可选，便于对照）",
+      },
+      {
+        key: "TIKTOK_CLIENT_SECRET",
+        label: "Client Secret",
+        secret: true,
+        required: false,
+      },
+      {
+        key: "TIKTOK_ACCESS_TOKEN",
+        label: "User Access Token",
+        secret: true,
+        required: true,
+        help: "用户授权后的 access token，需含 video.publish",
+      },
+      {
+        key: "TIKTOK_IMAGE_PUBLIC_URL",
+        label: "测试图公网 URL（可选）",
+        required: false,
+        help: "图文 Direct Post 仅支持 PULL_FROM_URL，且域名须在开发者后台验证；未填则停在媒体可达性步骤",
+      },
+      {
+        key: "TIKTOK_PRIVACY_LEVEL",
+        label: "隐私级别（可选）",
+        required: false,
+        placeholder: "SELF_ONLY",
+        help: "须落在 creator_info/query 返回的 privacy_level_options 内；未审核客户端默认 SELF_ONLY",
+      },
+    ],
   },
 };
 
 export const PLATFORM_ORDER = [
   "douyin",
+  "tiktok",
   "x",
   "facebook",
   "instagram",
-  "xiaohongshu",
-  "zhihu",
-  "tieba",
 ] as const;

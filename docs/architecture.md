@@ -27,7 +27,7 @@
 "workspaces": ["apps/*", "tools/*", "packages/*"]
 ```
 
-根脚本按域显式命名（`dev:pathway`、`build:pathway`），避免无歧义的全局 `dev` 被多个产品抢占。当前仅有 pathway 时，根 `dev` 可临时指向 `dev:pathway`。
+根脚本按域显式命名（`dev:pathway`、`dev:legal`、`build:pathway`），避免无歧义的全局 `dev` 被多个产品抢占。当前默认 `dev` 指向 `dev:pathway`。纯静态子工具（如 `dev-legal`）可只有 `site/` + 预览脚本，不必强行拆 web/server。
 
 ## 配置与本地数据
 

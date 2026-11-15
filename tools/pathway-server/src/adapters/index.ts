@@ -4,18 +4,14 @@ import { douyinAdapter } from "./douyin.js";
 import { xAdapter } from "./x.js";
 import { facebookAdapter } from "./facebook.js";
 import { instagramAdapter } from "./instagram.js";
-import { xiaohongshuAdapter } from "./xiaohongshu.js";
-import { zhihuAdapter } from "./zhihu.js";
-import { tiebaAdapter } from "./tieba.js";
+import { tiktokAdapter } from "./tiktok.js";
 
 const adapters: Record<PlatformId, PathwayAdapter> = {
   douyin: douyinAdapter,
+  tiktok: tiktokAdapter,
   x: xAdapter,
   facebook: facebookAdapter,
   instagram: instagramAdapter,
-  xiaohongshu: xiaohongshuAdapter,
-  zhihu: zhihuAdapter,
-  tieba: tiebaAdapter,
 };
 
 export function getAdapter(platformId: PlatformId): PathwayAdapter {
