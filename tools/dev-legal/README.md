@@ -1,8 +1,14 @@
 # @wob/dev-legal
 
-为开放平台注册准备的 **Terms of Service** / **Privacy Policy** 静态页。
+Worlds of Book **Official Website** + **Terms of Service** / **Privacy Policy** 静态页（同一 GitHub Pages，分 URL）。
 
-使用说明与 GitHub Pages 部署步骤见 [docs/tools/dev-legal.md](../../docs/tools/dev-legal.md)。
+| 路径 | 用途 |
+|------|------|
+| `/` | Official Website |
+| `/terms/` | Terms of Service |
+| `/privacy/` | Privacy Policy |
+
+使用说明与部署步骤见 [docs/tools/dev-legal.md](../../docs/tools/dev-legal.md)。
 
 ```bash
 npm run dev:legal
