@@ -25,16 +25,7 @@ docs/
 
 ## 启动子工具：发帖通路验证
 
-```bash
-cp tools/pathway-server/.env.example tools/pathway-server/.env
-npm install          # postinstall 会构建 @wob/pathway-core
-npm run dev:pathway  # 启动前也会先确保 core 已构建
-```
-
-- UI: http://127.0.0.1:5173
-- API: http://127.0.0.1:8787/api/health
-
-详细用法见 [docs/tools/pathway-verifier.md](docs/tools/pathway-verifier.md)。
+首次 / 更新后怎么启动，见 [docs/tools/pathway-verifier.md](docs/tools/pathway-verifier.md)。
 
 ## 常用脚本
 
