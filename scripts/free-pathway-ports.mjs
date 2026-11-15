@@ -1,16 +1,34 @@
 #!/usr/bin/env node
 /**
- * Free pathway local ports before `dev:pathway`.
- * Targets: Vite (5173) and pathway-server (8787).
+ * Free pathway local listen ports (default: 5173 Vite, 8787 API).
+ * Retries with SIGTERM then SIGKILL until the port is free.
+ *
+ * Usage:
+ *   node scripts/free-pathway-ports.mjs
+ *   node scripts/free-pathway-ports.mjs --ports=5173
+ *   node scripts/free-pathway-ports.mjs --ports=5173,8787
  */
 import { execSync } from "node:child_process";
 import { setTimeout as sleep } from "node:timers/promises";
 
-const PORTS = [5173, 8787];
+function parsePorts(argv) {
+  const flag = argv.find((a) => a.startsWith("--ports="));
+  if (!flag) return [5173, 8787];
+  return flag
+    .slice("--ports=".length)
+    .split(",")
+    .map((p) => Number(p.trim()))
+    .filter((n) => Number.isInteger(n) && n > 0);
+}
 
-function pidsOnPort(port) {
+const PORTS = parsePorts(process.argv.slice(2));
+const MAX_ROUNDS = 12;
+const ROUND_WAIT_MS = 250;
+
+function listenPids(port) {
   try {
-    const out = execSync(`lsof -ti tcp:${port}`, {
+    // Only LISTEN owners — avoid killing unrelated client sockets.
+    const out = execSync(`lsof -nP -iTCP:${port} -sTCP:LISTEN -t`, {
       encoding: "utf8",
       stdio: ["ignore", "pipe", "ignore"],
     }).trim();
@@ -21,25 +39,46 @@ function pidsOnPort(port) {
   }
 }
 
-function killPid(pid) {
+function killPid(pid, signal) {
   try {
-    process.kill(Number(pid), "SIGTERM");
+    process.kill(Number(pid), signal);
     return true;
   } catch {
     return false;
   }
 }
 
-const killed = [];
-for (const port of PORTS) {
-  for (const pid of pidsOnPort(port)) {
-    if (killPid(pid)) killed.push(`${pid}@${port}`);
+async function freePort(port) {
+  const actions = [];
+  for (let round = 0; round < MAX_ROUNDS; round++) {
+    const pids = listenPids(port);
+    if (pids.length === 0) return actions;
+
+    const signal = round < 3 ? "SIGTERM" : "SIGKILL";
+    for (const pid of pids) {
+      if (killPid(pid, signal)) {
+        actions.push(`${pid}@${port}/${signal}`);
+      }
+    }
+    await sleep(ROUND_WAIT_MS);
   }
+
+  const leftover = listenPids(port);
+  if (leftover.length) {
+    throw new Error(
+      `port ${port} still in use by pid(s) ${leftover.join(", ")} after ${MAX_ROUNDS} kill rounds`,
+    );
+  }
+  return actions;
 }
 
-if (killed.length) {
-  await sleep(300);
-  console.log(`[free-pathway-ports] freed: ${killed.join(", ")}`);
+const allActions = [];
+for (const port of PORTS) {
+  allActions.push(...(await freePort(port)));
+}
+
+if (allActions.length) {
+  console.log(`[free-pathway-ports] freed: ${allActions.join(", ")}`);
 } else {
   console.log(`[free-pathway-ports] ports ${PORTS.join(", ")} already free`);
 }
