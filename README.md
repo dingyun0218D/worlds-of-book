@@ -2,7 +2,7 @@
 
 Worlds of Book 是一个大型 monorepo：主产品应用放在 `apps/`，内部/运营子工具放在 `tools/`，可复用库放在 `packages/`。
 
-当前已落地的子工具：**发帖通路验证**（`tools/pathway-*`）、**开发者站点**（`tools/dev-legal`：官网 + ToS / Privacy）。
+当前已落地的子工具：**发帖通路验证**（`tools/pathway-*`）、**开发者站点**（`tools/dev-legal`：官网 + ToS / Privacy）。另可本地 clone **AiToEarn**（`tools/AiToEarn`，gitignore，不入仓）。
 
 ## 仓库地图
 
@@ -12,13 +12,16 @@ tools/
   pathway-web/            # @wob/pathway-web  通路验证 UI
   pathway-server/         # @wob/pathway-server 本机 API / 适配器
   dev-legal/              # @wob/dev-legal  官网 + ToS / Privacy（GitHub Pages）
+  AiToEarn/               # 本地 clone，gitignore，见 docs
 packages/
   pathway-core/           # @wob/pathway-core  通路类型与平台元数据
 docs/
   architecture.md         # 目录与命名约定
   tools/pathway-verifier.md
   tools/dev-legal.md
+  tools/aitoearn.md
 ```
+
 
 ## 要求
 
@@ -37,7 +40,12 @@ docs/
 npm run dev:legal
 ```
 
+## AiToEarn（本地依赖）
+
+外部仓本地 clone，不入本仓、不进 workspaces。首次与更新见 [docs/tools/aitoearn.md](docs/tools/aitoearn.md)。
+
 ## 常用脚本
+
 
 | 命令 | 说明 |
 |------|------|
