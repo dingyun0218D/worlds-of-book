@@ -10,6 +10,7 @@ config.local.json
 coverage/
 packages/*/dist/
 tools/*/dist/
+tools/AiToEarn/
 *.tsbuildinfo
 uploads/
 temp/

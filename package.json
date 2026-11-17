@@ -5,7 +5,9 @@
   "description": "Worlds of Book monorepo",
   "workspaces": [
     "apps/*",
-    "tools/*",
+    "tools/dev-legal",
+    "tools/pathway-server",
+    "tools/pathway-web",
     "packages/*"
   ],
   "scripts": {

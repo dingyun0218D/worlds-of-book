@@ -21,13 +21,19 @@
 
 ## Workspaces
 
-根 `package.json`：
+根 `package.json` 显式列出本仓工具包（不用 `tools/*`），避免本地 clone 的外部目录（如 `tools/AiToEarn`）被 npm 扫进 workspace：
 
 ```json
-"workspaces": ["apps/*", "tools/*", "packages/*"]
+"workspaces": [
+  "apps/*",
+  "tools/dev-legal",
+  "tools/pathway-server",
+  "tools/pathway-web",
+  "packages/*"
+]
 ```
 
-根脚本按域显式命名（`dev:pathway`、`dev:legal`、`build:pathway`），避免无歧义的全局 `dev` 被多个产品抢占。当前默认 `dev` 指向 `dev:pathway`。纯静态子工具（如 `dev-legal`）可只有 `site/` + 预览脚本，不必强行拆 web/server。
+根脚本按域显式命名（`dev:pathway`、`dev:legal`、`build:pathway`），避免无歧义的全局 `dev` 被多个产品抢占。当前默认 `dev` 指向 `dev:pathway`。纯静态子工具（如 `dev-legal`）可只有 `site/` + 预览脚本，不必强行拆 web/server。本地依赖的外部仓见 [docs/tools/aitoearn.md](tools/aitoearn.md)。
 
 ## 配置与本地数据
 
