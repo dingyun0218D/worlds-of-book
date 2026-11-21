@@ -154,21 +154,32 @@ PY
 }
 
 # --- resolve secrets (prefer existing) ---
-mapfile -t AI_AUTH < <(read_yaml_auth "$AI_CONFIG")
-mapfile -t SERVER_AUTH < <(read_yaml_auth "$SERVER_CONFIG")
+# Bash 3.2 compatible (macOS /bin/bash): avoid mapfile.
+AI_SECRET=""
+AI_INTERNAL=""
+SERVER_SECRET=""
+SERVER_INTERNAL=""
+{
+  IFS= read -r AI_SECRET || true
+  IFS= read -r AI_INTERNAL || true
+} < <(read_yaml_auth "$AI_CONFIG")
+{
+  IFS= read -r SERVER_SECRET || true
+  IFS= read -r SERVER_INTERNAL || true
+} < <(read_yaml_auth "$SERVER_CONFIG")
 ENV_JWT="$(read_env_jwt || true)"
 
 JWT_SECRET=""
 INTERNAL_TOKEN=""
 
-for candidate in "$ENV_JWT" "${AI_AUTH[0]:-}" "${SERVER_AUTH[0]:-}"; do
+for candidate in "$ENV_JWT" "$AI_SECRET" "$SERVER_SECRET"; do
   if [[ -n "${candidate:-}" ]]; then
     JWT_SECRET="$candidate"
     break
   fi
 done
 
-for candidate in "${AI_AUTH[1]:-}" "${SERVER_AUTH[1]:-}"; do
+for candidate in "$AI_INTERNAL" "$SERVER_INTERNAL"; do
   if [[ -n "${candidate:-}" ]]; then
     INTERNAL_TOKEN="$candidate"
     break
